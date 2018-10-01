@@ -2,13 +2,13 @@
  Quik Sort:
   3,   2,   4,   7,   6,   5,   1
                                 7    
-                left                    right                        
+             left                  right                        
  [3,   2,   4,   6,   5,   1]       [ ]
-        left          right
+      left             right
                  4              
  [3,   2,   1]	     [6,   5]
        2
-  left   right      left   right
+  left   right      left  right
  [1]       [3]	         
                       5
                 left     right
