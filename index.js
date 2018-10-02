@@ -26,42 +26,33 @@ let arr = [
 
 //swap style recursion version
 function quickSort1(arr){
-    return sort(arr, 0, arr.length - 1);
-    function sort(arr, left, right){
-        var len = arr.length, 
-        pivot,
-        partitionIndex;
-    
-        if(left < right){
-            pivot = right;
-            partitionIndex = partition(arr, pivot, left, right);
-            
-            //sort left and right
-            sort(arr, left, partitionIndex - 1);
-            sort(arr, partitionIndex + 1, right);
-        }
-        return arr;
+    var quickSort = function(array, leftIdx, rightIdx){
+          let pivotPos = partition(array, leftIdx, rightIdx);
+          if (leftIdx < pivotPos - 1) quickSort(array, leftIdx, pivotPos-1);
+          if (rightIdx > pivotPos) quickSort(array, pivotPos, rightIdx);
+          return array;
     }
     
-    function partition(arr, pivot, left, right){
-        var pivotValue = arr[pivot],
-            partitionIndex = left;
-    
-        for(var i = left; i < right; i++){
-            if(arr[i] < pivotValue){
-                swap(arr, i, partitionIndex);
-                partitionIndex++;
-            }
-        }
-        swap(arr, right, partitionIndex);
-        return partitionIndex;
+    var swap = function(array, leftIdx, rightIdx){
+          let array_leftIdx = array[leftIdx];
+          array[leftIdx] = array[rightIdx];
+          array[rightIdx] = array_leftIdx;    
     }
+    
+    var partition = function(array, leftIdx, rightIdx){
+          let pivotIndex = Math.floor( (leftIdx + rightIdx) / 2 );
+          let pivotValue = array[pivotIndex];
 
-    function swap(arr, i, j){
-        var temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+          while (leftIdx <= rightIdx){
+              while(array[leftIdx] < pivotValue) leftIdx++;
+              while(array[rightIdx] > pivotValue) rightIdx--;
+              if (leftIdx <= rightIdx){
+                  swap(array, leftIdx++, rightIdx--);  
+              }
+          }
+          return leftIdx;
     }
+    return quickSort(arr, 0, arr.length-1);
 }
 
 //网上最多的版本
